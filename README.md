@@ -7,6 +7,8 @@ Arduino based eeprom programmer. Arduino firmware + PC software.
  - Write to EEPROM
  - can copy one ROM to an other EEPROM
  - Erase EEPROM
+
+
 It's based mainly on Ben Eater's design. But has a few differences.  
 The for ardunio and processing is different.
 You need 2 shift registers for the output of the adress lines. 

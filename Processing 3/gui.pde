@@ -125,13 +125,14 @@ public void  Clear_EEPROM()
   
   if (connected_status){
  epromadress=0;step=0;
+ temp="";
  byte_count=0;
  status_msg="Erasing...";
  delay(400);
  slider1.setVisible(true);
  eraseeeprom=!eraseeeprom;
  if (eraseeeprom==true) clearbutton.setCaptionLabel("Cancel");
- if (eraseeeprom==false) {clearbutton.setCaptionLabel("Erase");epromadress=0;slider1.setVisible(false);}
+ if (eraseeeprom==false) {clearbutton.setCaptionLabel("Erase");epromadress=0;slider1.setVisible(false);status_msg="Erase Canceled !";}
  
  
   }
@@ -151,7 +152,7 @@ public void  Write_EEPROM()
  slider1.setVisible(true);
  writeeprom=!writeeprom;
  if (writeeprom==true) writebutton.setCaptionLabel("Stop");
- if (writeeprom==false) {writebutton.setCaptionLabel("Write");epromadress=0;slider1.setVisible(false);}
+ if (writeeprom==false) {writebutton.setCaptionLabel("Write");epromadress=0;slider1.setVisible(false);status_msg="Write Canceled !";}
  
  
   }
@@ -170,7 +171,7 @@ public void  Read_EEPROM()
  readeprom=!readeprom;
  String str2="";
  if (readeprom==true) readbutton.setCaptionLabel("Stop");
- if (readeprom==false) {readbutton.setCaptionLabel("Read EEPROM");epromadress=0;slider1.setVisible(false);}
+ if (readeprom==false) {readbutton.setCaptionLabel("Read EEPROM");epromadress=0;slider1.setVisible(false);status_msg="Read Canceled";}
  data1="";
  byte_count=0;}
  }

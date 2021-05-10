@@ -35,7 +35,7 @@ String data1="";
 String sfilename;
 String data11;
 String serialstring;
-
+String temp="";
 ControlP5 cp5;
 Serial myPort;  //the Serial port object
 PApplet applet = this;
@@ -81,11 +81,11 @@ void draw() {
 
 // -----  SAVE FILE ---- 
 if (file_event==true & savefile==true) {
-    byte[] nums=new byte[epromsize];
-    if (data1!="") {
-                    String[] q = splitTokens(data1);
-                    for (int i=0; i<epromsize;i++){
-                         int j =unhex(q[i]);
+  if (data1!="") {
+    String[] q = splitTokens(data1);
+    byte[] nums=new byte[q.length];
+                    for (int i=0; i<q.length;++i){
+                         int  j =unhex(q[i]);
                          nums[i]=byte(j); }
                      if (sfilename!=null) saveBytes(sfilename, nums);
                     }
@@ -116,20 +116,27 @@ if (file_event==true & openfile==true){
 
 if (eraseeeprom==true) {
   if (init_state==true){
+     
       String str="a"+hex(epromadress).substring(4,8)+":[FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ]";
       boolean next=false;
       myPort.write(str);
-      delay(1);
+      delay(2);
       while (next==false) {
         serialstring = myPort.readStringUntil('\n');
         if (serialstring==null) {myPort.write(str);delay(5);}
         if (serialstring!=null) {
                                   if (serialstring.contains("ok")) {
                                               next=true;
+                                              temp=temp+"FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF ";
+                                              str2=str2+hex(epromadress).substring(4,8)+": \n"+hex(epromadress+16).substring(4,8)+": \n";;
                                               epromadress+=32;
                                               slider1.setValue(epromadress);
                                               byte_count++;}
-                                 }    
+                                              
+      myTextarea2.setText(str2);
+      myTextarea.setText(temp);
+                               data1=temp;
+                             }    
                              }
                              
        if (epromadress>=epromsize) {eraseeeprom=false;
@@ -164,7 +171,9 @@ if (writeeprom==true) {
                                     byte_count++;
                                     step+=96;}
                                 }    
-                          }
+      
+                        
+                      }
 
     if (epromadress>=epromsize) {writeeprom=false;
                                  writebutton.setCaptionLabel("Write");
@@ -184,7 +193,7 @@ if (readeprom==true) {
  
 if (init_state==true) {
   String str="m"+hex(epromadress).substring(4,8);
-  myPort.write(str);delay(2);
+  myPort.write(str);delay(1);
   process=false;
   boolean next=false;
       while (next==false) {

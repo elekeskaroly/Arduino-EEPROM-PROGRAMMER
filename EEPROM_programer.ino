@@ -105,8 +105,8 @@ if (Serial.available ( ) > 0)
 if (init_state==true) {
                         
   byte_count=0;
-  String code = Serial.readString(); //Read opcode from serial port
-  delay(1);
+  String code = Serial.readStringUntil('\n'); //Read opcode from serial port
+  
 
 if (code[0]=='i') Serial.println("EEPROM programmer already conected.");
 if (code[0]=='x') programmer_end();

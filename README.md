@@ -1,4 +1,4 @@
-# Arduino-EEPROM-PROGRAMMER
+# Arduino EEPROM PROGRAMMER
 Arduino based eeprom programmer. Arduino firmware + PC software.
  - Load files from hard drive
  - Save files to hard drive

@@ -9,12 +9,11 @@ Arduino based eeprom programmer. Arduino firmware + PC software.
  - Erase EEPROM
 
 
-It's based mainly on Ben Eater's https://www.youtube.com/watch?v=K88pgWhEb1Mdesign
-
-But has a few differences.  
+Hardware based on Ben Eater's https://www.youtube.com/watch?v=K88pgWhEb1Mdesign
 You need 2 shift registers for the output of the adress lines. 
-Connect shift register outputs to EEPROM adresses. (First shift register, first data out pin to adress 0)
-Data lines conected to arduino data pins. EEPROM data 0 to arduino digital output 2.
+Connect shift register outputs to EEPROM adress lines. (First shift register, first data out pin to adress 0, second to a1 ...)
+Data lines conected to arduino data pins. EEPROM data 0 to arduino digital output 2, data 1 to D3 etc.
+For the adress display, use a TM1637 connected to pins A3,A2 on the arduino.
 
 ![Image 1](https://github.com/elekeskaroly/Arduino-EEPROM-PROGRAMMER/blob/main/screen%20003.jpg)
 ![Image 2](https://github.com/elekeskaroly/Arduino-EEPROM-PROGRAMMER/blob/main/screen%20002.jpg)
